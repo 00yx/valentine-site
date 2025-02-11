@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="container">
+        <h1>Hey Manjot!</h1>
+        <p>Will you be my Valentine? ❤️</p>
+        
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No</button>
+        </div>
+
+        <p id="response"></p>
+        <div id="kittens"></div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const responseText = document.getElementById('response');
+        const kittensDiv = document.getElementById('kittens');
+        let noBtnSize = 100;  // Initial size percentage for "No" button
+
+        noBtn.addEventListener('mouseover', () => {
+            noBtnSize -= 10;  // Shrink the button by 10% each time
+            if (noBtnSize > 10) {
+                noBtn.style.transform = `scale(${noBtnSize / 100})`;
+            } else {
+                noBtn.style.display = 'none';  // Hide the button if it's too small
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            responseText.textContent = "YAY! I LOVE YOU ❤️";
+            showKittens();
+        });
+
+        function showKittens() {
+            for (let i = 0; i < 3; i++) {
+                const kitten = document.createElement('img');
+                kitten.src = 'https://placekitten.com/200/200';
+                kitten.alt = 'Happy Kitten';
+                kitten.classList.add('kitten');
+                kittensDiv.appendChild(kitten);
+            }
+        }
+
+        // Heart Animation
+        const heartsContainer = document.querySelector('.hearts');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
